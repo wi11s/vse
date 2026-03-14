@@ -4,7 +4,5 @@
 [ ] App Icon
 [ ] Different colors for change/delete/create
 [ ] User shouldn't have to click reload
-[ ] Create a better name for this project
-[ ] Simplify the Diff page UI
 [ ] "File Created" and "File Deleted" instead of "No Changes" on diff page, when applicable 
-[ ] Add filter at the 
+[ ] Filter for changes only
