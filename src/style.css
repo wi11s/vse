@@ -7,55 +7,77 @@
   /* Theme variables */
   /* Mild dark default */
   --bg: #1b1d1f;
-  --fg: #e5e7eb;
-  --muted: #a3a9b6;
+  --fg: #f1f5f9;        /* lighter on dark for contrast */
+  --muted: #cbd5e1;     /* softer, pastel slate */
   --border: #2f3237;
   --hover: rgba(255,255,255,0.08);
   --gutter-bg: rgba(255,255,255,0.08);
-  --gutter-fg: #cbd5e1;
-  --active-line-bg: rgba(59,130,246,0.20);
-  --active-gutter-bg: rgba(59,130,246,0.24);
-  --add-bg: rgba(16,185,129,0.20);
-  --add-fg: #a7f3d0;
-  --del-bg: rgba(239,68,68,0.18);
-  --del-fg: #fecaca;
+  --gutter-fg: #e2e8f0; /* lighter gutter text */
+  --active-line-bg: rgba(59,130,246,0.16);
+  --active-gutter-bg: rgba(59,130,246,0.20);
+  --add-bg: rgba(34,197,94,0.18);  /* soft green */
+  --add-fg: #dcfce7;              /* pastel green text if needed */
+  --del-bg: rgba(244,63,94,0.16);  /* soft red */
+  --del-fg: #fecaca;              /* pastel red text */
   --warn-bg: rgba(234,179,8,0.18);
   --warn-border: rgba(234,179,8,0.45);
+  /* Syntax variables (dark) */
+  --syn-keyword: #93c5fd;
+  --syn-string: #86efac;
+  --syn-variable: #fde68a;
+  --syn-number: #f9a8d4;
+  --syn-comment: #94a3b8;
+  --syn-type: #a5b4fc;
+  --syn-function: #7dd3fc;
+  --syn-operator: #e2e8f0;
+  --syn-tag: #fca5a5;
+  --syn-attr: #fde68a;
 }
 
 :root[data-theme="light"] {
   /* Mild light */
-  --bg: #f3f4f6;
-  --fg: #111827;
-  --muted: #6b7280;
+  --bg: #eef1f5;                  /* slightly darker than white */
+  --fg: #0f172a;                  /* darker on light for contrast */
+  --muted: #475569;               /* slate-600 */
   --border: #d1d5db;
   --hover: rgba(0,0,0,0.05);
   --gutter-bg: #e5e7eb;
-  --gutter-fg: #374151;
-  --active-line-bg: rgba(59,130,246,0.10);
+  --gutter-fg: #334155;           /* slate-700 */
+  --active-line-bg: rgba(59,130,246,0.12);
   --active-gutter-bg: rgba(59,130,246,0.14);
-  --add-bg: rgba(16,185,129,0.16);
+  --add-bg: rgba(34,197,94,0.14);
   --add-fg: #065f46;
-  --del-bg: rgba(239,68,68,0.12);
+  --del-bg: rgba(244,63,94,0.12);
   --del-fg: #7f1d1d;
   --warn-bg: rgba(234,179,8,0.16);
   --warn-border: rgba(234,179,8,0.40);
+  /* Syntax variables (light) */
+  --syn-keyword: #3b82f6;   /* blue-500 */
+  --syn-string: #10b981;    /* emerald-500 */
+  --syn-variable: #f59e0b;  /* amber-500 */
+  --syn-number: #d946ef;    /* fuchsia-500 */
+  --syn-comment: #64748b;   /* slate-500 */
+  --syn-type: #6366f1;      /* indigo-500 */
+  --syn-function: #0ea5e9;  /* sky-500 */
+  --syn-operator: #334155;  /* slate-700 */
+  --syn-tag: #ef4444;       /* red-500 */
+  --syn-attr: #d97706;      /* amber-600 */
 }
 
 :root[data-theme="dark"] {
   /* Mild dark */
   --bg: #1b1d1f;
-  --fg: #e5e7eb;
-  --muted: #a3a9b6;
+  --fg: #f1f5f9;
+  --muted: #cbd5e1;
   --border: #2f3237;
   --hover: rgba(255,255,255,0.08);
   --gutter-bg: rgba(255,255,255,0.08);
-  --gutter-fg: #cbd5e1;
-  --active-line-bg: rgba(59,130,246,0.18);
-  --active-gutter-bg: rgba(59,130,246,0.22);
-  --add-bg: rgba(16,185,129,0.18);
-  --add-fg: #a7f3d0;
-  --del-bg: rgba(239,68,68,0.16);
+  --gutter-fg: #e2e8f0;
+  --active-line-bg: rgba(59,130,246,0.16);
+  --active-gutter-bg: rgba(59,130,246,0.20);
+  --add-bg: rgba(34,197,94,0.18);
+  --add-fg: #dcfce7;
+  --del-bg: rgba(244,63,94,0.16);
   --del-fg: #fecaca;
   --warn-bg: rgba(234,179,8,0.18);
   --warn-border: rgba(234,179,8,0.45);
@@ -121,7 +143,7 @@ aside span.selected { background: var(--active-line-bg); }
 /* Keep active gutter high-contrast in light and dark modes */
 .editor .cm-activeLineGutter { background: var(--active-gutter-bg); color: inherit; font-weight: 600; }
 /* Ensure caret is visible */
-.editor .cm-content { caret-color: currentColor; }
+.editor .cm-content { caret-color: currentColor; color: var(--fg); }
 .editor .cm-cursor { border-left-color: currentColor; }
 
 /* Merge view highlights in single editor */
@@ -133,6 +155,17 @@ aside span.selected { background: var(--active-line-bg); }
   padding: 0 8px;
   white-space: pre-wrap;
 }
+
+/* Pastel syntax highlighting using default token class names */
+.editor .cmt-keyword { color: var(--syn-keyword); }
+.editor .cmt-string { color: var(--syn-string); }
+.editor .cmt-number, .editor .cmt-boolean, .editor .cmt-null { color: var(--syn-number); }
+.editor .cmt-comment { color: var(--syn-comment); font-style: italic; }
+.editor .cmt-typeName, .editor .cmt-className { color: var(--syn-type); }
+.editor .cmt-function, .editor .cmt-propertyName { color: var(--syn-function); }
+.editor .cmt-operator, .editor .cmt-operatorKeyword { color: var(--syn-operator); }
+.editor .cmt-tagName { color: var(--syn-tag); }
+.editor .cmt-attributeName { color: var(--syn-attr); }
 
 .reload-banner { padding: 4px 10px; background: var(--warn-bg); border-bottom: 1px solid var(--warn-border); flex-shrink: 0; }
 .reload-banner button {

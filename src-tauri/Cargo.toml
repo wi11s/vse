@@ -4,9 +4,7 @@ version = "0.1.0"
 description = "VSE — Versioned Source Explorer"
 edition = "2021"
 
-[lib]
-name = "vse_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
+## No library target; single binary with main.rs
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }

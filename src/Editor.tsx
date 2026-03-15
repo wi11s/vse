@@ -1,7 +1,12 @@
 import { Show, createEffect, createSignal, onCleanup, onMount } from "solid-js";
-import { EditorView, minimalSetup } from "codemirror";
-import { EditorState, StateField, RangeSetBuilder } from "@codemirror/state";
-import { LanguageDescription } from "@codemirror/language";
+import { EditorView, keymap, highlightSpecialChars, drawSelection, dropCursor } from "@codemirror/view";
+import { history, defaultKeymap, historyKeymap } from "@codemirror/commands";
+import { closeBrackets, closeBracketsKeymap, completionKeymap } from "@codemirror/autocomplete";
+import { searchKeymap } from "@codemirror/search";
+import { lintKeymap } from "@codemirror/lint";
+import { EditorState, StateField, RangeSetBuilder, type Extension } from "@codemirror/state";
+import { LanguageDescription, syntaxHighlighting, defaultHighlightStyle } from "@codemirror/language";
+import { classHighlighter } from "@lezer/highlight";
 import { languages } from "@codemirror/language-data";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
@@ -105,10 +110,19 @@ export function Editor(props: Props) {
       if (stale) return;
 
       const langDesc = LanguageDescription.matchFilename(languages, file);
-      const langExt = langDesc ? (await langDesc.load()).extension : [];
+      let langExt: Extension | [] = [];
+      if (langDesc) {
+        try {
+          langExt = await langDesc.load();
+        } catch (_) {
+          langExt = [];
+        }
+      }
       if (stale) return;
 
       const baseLines = base.split("\n");
+
+      // syntax highlighting is customized via CSS token classes (see style.css)
       const addLineDecoration = Decoration.line({ attributes: { class: "cm-line-add" } });
 
       const decoField = StateField.define<DecorationSet>({
@@ -156,10 +170,23 @@ export function Editor(props: Props) {
         state: EditorState.create({
           doc: content,
           extensions: [
-            minimalSetup,
+            // Build our own minimal setup to avoid mixing module instances
+            highlightSpecialChars(),
+            history(),
+            drawSelection(),
+            dropCursor(),
+            keymap.of([
+              ...defaultKeymap,
+              ...historyKeymap,
+              ...closeBracketsKeymap,
+              ...searchKeymap,
+              ...completionKeymap,
+              ...lintKeymap,
+            ]),
             lineNumbers(),
             highlightActiveLine(),
             highlightActiveLineGutter(),
+            syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
             langExt,
             EditorView.lineWrapping,
             decoField,
