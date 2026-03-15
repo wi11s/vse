@@ -93,11 +93,13 @@ html, body { background: var(--bg); color: var(--fg); }
 }
 
 aside {
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   border-right: 1px solid var(--border);
-  padding: 8px 0;
+  padding: 8px 0 0 0;
+  min-height: 0;
 }
-aside ul { list-style: none; padding: 0; }
+aside ul { list-style: none; padding: 0; margin: 0; }
 aside li ul { padding-left: 12px; }
 aside span {
   display: block;
@@ -109,6 +111,25 @@ aside span {
 }
 aside span:hover { background: var(--hover); }
 aside span.selected { background: var(--active-line-bg); }
+/* Scroll area for tree/list */
+aside > ul { overflow-y: auto; flex: 1; }
+/* Footer */
+.sidebar-footer {
+  display: flex;
+  gap: 6px;
+  padding: 4px 6px;
+  border-top: 1px solid var(--border);
+  justify-content: flex-end; /* move buttons to right */
+}
+.sidebar-footer button.icon {
+  background: none;
+  border: none; /* no rounded borders */
+  padding: 2px 4px; /* a little padding */
+  cursor: pointer;
+  color: var(--fg);
+}
+.sidebar-footer button.icon:hover { background: var(--hover); }
+.sidebar-footer button.active { background: var(--hover); }
 /* Git status coloring for files */
 aside span.file.created { color: var(--add-fg); }
 aside span.file.removed { color: var(--del-fg); text-decoration: line-through; }
