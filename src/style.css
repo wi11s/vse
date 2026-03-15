@@ -156,16 +156,16 @@ aside span.selected { background: var(--active-line-bg); }
   white-space: pre-wrap;
 }
 
-/* Pastel syntax highlighting using default token class names */
-.editor .cmt-keyword { color: var(--syn-keyword); }
-.editor .cmt-string { color: var(--syn-string); }
-.editor .cmt-number, .editor .cmt-boolean, .editor .cmt-null { color: var(--syn-number); }
-.editor .cmt-comment { color: var(--syn-comment); font-style: italic; }
-.editor .cmt-typeName, .editor .cmt-className { color: var(--syn-type); }
-.editor .cmt-function, .editor .cmt-propertyName { color: var(--syn-function); }
-.editor .cmt-operator, .editor .cmt-operatorKeyword { color: var(--syn-operator); }
-.editor .cmt-tagName { color: var(--syn-tag); }
-.editor .cmt-attributeName { color: var(--syn-attr); }
+/* Pastel syntax highlighting using tok-* classes from classHighlighter */
+.editor .tok-keyword { color: var(--syn-keyword); }
+.editor .tok-string, .editor .tok-string2 { color: var(--syn-string); }
+.editor .tok-number, .editor .tok-bool, .editor .tok-atom, .editor .tok-literal { color: var(--syn-number); }
+.editor .tok-comment { color: var(--syn-comment); font-style: italic; }
+.editor .tok-typeName, .editor .tok-className, .editor .tok-namespace { color: var(--syn-type); }
+.editor .tok-propertyName, .editor .tok-macroName { color: var(--syn-function); }
+.editor .tok-operator { color: var(--syn-operator); }
+.editor .tok-heading { color: var(--syn-tag); }
+.editor .tok-labelName { color: var(--syn-attr); }
 
 .reload-banner { padding: 4px 10px; background: var(--warn-bg); border-bottom: 1px solid var(--warn-border); flex-shrink: 0; }
 .reload-banner button {

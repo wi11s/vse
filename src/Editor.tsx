@@ -5,7 +5,7 @@ import { closeBrackets, closeBracketsKeymap, completionKeymap } from "@codemirro
 import { searchKeymap } from "@codemirror/search";
 import { lintKeymap } from "@codemirror/lint";
 import { EditorState, StateField, RangeSetBuilder, type Extension } from "@codemirror/state";
-import { LanguageDescription, syntaxHighlighting, defaultHighlightStyle } from "@codemirror/language";
+import { LanguageDescription, syntaxHighlighting } from "@codemirror/language";
 import { classHighlighter } from "@lezer/highlight";
 import { languages } from "@codemirror/language-data";
 import { invoke } from "@tauri-apps/api/core";
@@ -186,7 +186,8 @@ export function Editor(props: Props) {
             lineNumbers(),
             highlightActiveLine(),
             highlightActiveLineGutter(),
-            syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+            // CSS-based syntax highlighting via `.cmt-*` token classes
+            syntaxHighlighting(classHighlighter),
             langExt,
             EditorView.lineWrapping,
             decoField,
