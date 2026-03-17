@@ -16,9 +16,10 @@
   --active-line-bg: rgba(59,130,246,0.16);
   --active-gutter-bg: rgba(59,130,246,0.20);
   --add-bg: rgba(34,197,94,0.18);  /* soft green */
-  --add-fg: #dcfce7;              /* pastel green text if needed */
+  --add-fg: #4ade80;              /* green-400 — visible on dark */
   --del-bg: rgba(244,63,94,0.16);  /* soft red */
-  --del-fg: #fecaca;              /* pastel red text */
+  --del-fg: #f87171;              /* red-400 — visible on dark */
+  --dirty-fg: #facc15;            /* yellow-400 — visible on dark */
   --warn-bg: rgba(234,179,8,0.18);
   --warn-border: rgba(234,179,8,0.45);
   /* Syntax variables (dark) */
@@ -46,9 +47,10 @@
   --active-line-bg: rgba(59,130,246,0.12);
   --active-gutter-bg: rgba(59,130,246,0.14);
   --add-bg: rgba(34,197,94,0.14);
-  --add-fg: #065f46;
+  --add-fg: #16a34a;              /* green-600 — visible on light */
   --del-bg: rgba(244,63,94,0.12);
-  --del-fg: #7f1d1d;
+  --del-fg: #dc2626;              /* red-600 — visible on light */
+  --dirty-fg: #b45309;            /* amber-700 — visible on light */
   --warn-bg: rgba(234,179,8,0.16);
   --warn-border: rgba(234,179,8,0.40);
   /* Syntax variables (light) */
@@ -76,9 +78,10 @@
   --active-line-bg: rgba(59,130,246,0.16);
   --active-gutter-bg: rgba(59,130,246,0.20);
   --add-bg: rgba(34,197,94,0.18);
-  --add-fg: #dcfce7;
+  --add-fg: #4ade80;
   --del-bg: rgba(244,63,94,0.16);
-  --del-fg: #fecaca;
+  --del-fg: #f87171;
+  --dirty-fg: #facc15;
   --warn-bg: rgba(234,179,8,0.18);
   --warn-border: rgba(234,179,8,0.45);
 }
@@ -151,7 +154,7 @@ aside span.file.removed { color: var(--del-fg); text-decoration: line-through; }
 
 .hint { padding: 8px; opacity: 0.72; color: var(--muted); }
 .hidden { display: none; }
-.dirty { color: #eab308; }
+.dirty { color: var(--dirty-fg); }
 
 /* Pane */
 .pane { display: flex; flex-direction: column; overflow: hidden; }

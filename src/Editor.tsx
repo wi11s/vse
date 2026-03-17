@@ -215,6 +215,7 @@ export function Editor(props: Props) {
     const file = props.file;
     const root = props.root;
     const _tick = reloadTick();
+    closeHover();
     if (!file) {
       view?.destroy();
       view = undefined;
